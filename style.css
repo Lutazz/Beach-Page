@@ -714,17 +714,16 @@ body {
   bottom: calc(28.5% + 150px);
   left: -60px;
   z-index: 5;
+  opacity: 0;
 }
 
 .crab-large {
-  animation: crabWalk 7s linear forwards;
-  animation-delay: 6s;
+  animation: crabWalk 22s linear 6s infinite;
 }
 
 .crab-small {
   bottom: calc(28.5% + 155px);
-  animation: crabWalk 7s linear forwards;
-  animation-delay: 7s;
+  animation: crabWalk 22s linear 7s infinite;
 }
 
 /* --- 螃蟹身体 --- */
@@ -871,10 +870,13 @@ body {
 .crab-small .crab-leg-3 { right: -5px; }
 .crab-small .crab-leg-4 { right: -4px; }
 
-/* --- 螃蟹走路动画 --- */
+/* --- 螃蟹走路动画（走路 7s + 间隔 15s = 周期 22s） --- */
 @keyframes crabWalk {
-  0%   { left: -60px; }
-  100% { left: calc(100% + 60px); }
+  0%       { left: -60px; opacity: 0; }
+  0.45%    { left: -60px; opacity: 1; }
+  31.82%   { left: calc(100% + 60px); opacity: 1; }
+  32%      { left: calc(100% + 60px); opacity: 0; }
+  100%     { left: -60px; opacity: 0; }
 }
 
 /* --- 螃蟹移动痕迹 --- */
@@ -898,41 +900,43 @@ body {
   background: rgba(160, 130, 80, 0.5);
   border-radius: 50%;
   opacity: 0;
-  animation: traceAppear 7s linear forwards;
+  animation: traceAppear 22s linear infinite;
 }
 
-/* 大螃蟹痕迹：12 个点均匀分布，延迟 6s（与大螃蟹同步），每 ~0.51s 出现一个 */
+/* 大螃蟹痕迹：12 个点均匀分布，延迟 6s（与大螃蟹同步），每 ~0.58s 出现一个，周期 22s */
 .crab-trace-large .t1  { left: 0%;    animation-delay: 6.0s; }
-.crab-trace-large .t2  { left: 8.3%;  animation-delay: 6.51s; }
-.crab-trace-large .t3  { left: 16.6%; animation-delay: 7.02s; }
-.crab-trace-large .t4  { left: 25%;   animation-delay: 7.53s; }
-.crab-trace-large .t5  { left: 33.3%; animation-delay: 8.04s; }
-.crab-trace-large .t6  { left: 41.6%; animation-delay: 8.55s; }
-.crab-trace-large .t7  { left: 50%;   animation-delay: 9.06s; }
-.crab-trace-large .t8  { left: 58.3%; animation-delay: 9.57s; }
-.crab-trace-large .t9  { left: 66.6%; animation-delay: 10.08s; }
-.crab-trace-large .t10 { left: 75%;   animation-delay: 10.59s; }
-.crab-trace-large .t11 { left: 83.3%; animation-delay: 11.1s; }
-.crab-trace-large .t12 { left: 91.6%; animation-delay: 11.61s; }
+.crab-trace-large .t2  { left: 8.3%;  animation-delay: 6.58s; }
+.crab-trace-large .t3  { left: 16.6%; animation-delay: 7.17s; }
+.crab-trace-large .t4  { left: 25%;   animation-delay: 7.75s; }
+.crab-trace-large .t5  { left: 33.3%; animation-delay: 8.33s; }
+.crab-trace-large .t6  { left: 41.6%; animation-delay: 8.92s; }
+.crab-trace-large .t7  { left: 50%;   animation-delay: 9.5s; }
+.crab-trace-large .t8  { left: 58.3%; animation-delay: 10.08s; }
+.crab-trace-large .t9  { left: 66.6%; animation-delay: 10.67s; }
+.crab-trace-large .t10 { left: 75%;   animation-delay: 11.25s; }
+.crab-trace-large .t11 { left: 83.3%; animation-delay: 11.83s; }
+.crab-trace-large .t12 { left: 91.6%; animation-delay: 12.42s; }
 
-/* 小螃蟹痕迹：延迟整体 +1s，水平偏移 4% 错开排列 */
+/* 小螃蟹痕迹：延迟整体 +1s，水平偏移 4% 错开排列，周期 22s */
 .crab-trace-small .t1  { left: 4%;    animation-delay: 7.0s; }
-.crab-trace-small .t2  { left: 12.3%; animation-delay: 7.51s; }
-.crab-trace-small .t3  { left: 20.6%; animation-delay: 8.02s; }
-.crab-trace-small .t4  { left: 29%;   animation-delay: 8.53s; }
-.crab-trace-small .t5  { left: 37.3%; animation-delay: 9.04s; }
-.crab-trace-small .t6  { left: 45.6%; animation-delay: 9.55s; }
-.crab-trace-small .t7  { left: 54%;   animation-delay: 10.06s; }
-.crab-trace-small .t8  { left: 62.3%; animation-delay: 10.57s; }
-.crab-trace-small .t9  { left: 70.6%; animation-delay: 11.08s; }
-.crab-trace-small .t10 { left: 79%;   animation-delay: 11.59s; }
-.crab-trace-small .t11 { left: 87.3%; animation-delay: 12.1s; }
-.crab-trace-small .t12 { left: 95.6%; animation-delay: 12.61s; }
+.crab-trace-small .t2  { left: 12.3%; animation-delay: 7.58s; }
+.crab-trace-small .t3  { left: 20.6%; animation-delay: 8.17s; }
+.crab-trace-small .t4  { left: 29%;   animation-delay: 8.75s; }
+.crab-trace-small .t5  { left: 37.3%; animation-delay: 9.33s; }
+.crab-trace-small .t6  { left: 45.6%; animation-delay: 9.92s; }
+.crab-trace-small .t7  { left: 54%;   animation-delay: 10.5s; }
+.crab-trace-small .t8  { left: 62.3%; animation-delay: 11.08s; }
+.crab-trace-small .t9  { left: 70.6%; animation-delay: 11.67s; }
+.crab-trace-small .t10 { left: 79%;   animation-delay: 12.25s; }
+.crab-trace-small .t11 { left: 87.3%; animation-delay: 12.83s; }
+.crab-trace-small .t12 { left: 95.6%; animation-delay: 13.42s; }
 
 @keyframes traceAppear {
-  0%, 3% { opacity: 0; }
-  5% { opacity: 0.5; }
-  100% { opacity: 0.5; }
+  0%, 2%   { opacity: 0; }
+  4%       { opacity: 0.5; }
+  33%      { opacity: 0.5; }
+  45%      { opacity: 0; }
+  100%     { opacity: 0; }
 }
 
 /* 钳子开合动画 */
@@ -1410,29 +1414,4 @@ body {
   }
 }
 
-/* --- 小狗探头动画 --- */
-.dog-peek {
-  position: absolute;
-  bottom: -250px;            /* scale(3) 总高约 234px，加深隐藏确保不泄露 */
-  left: calc(50% - 227.5px); /* 居中对齐后再往左移 200px */
-  z-index: 15;
-  transform: scale(3);       /* 放大三倍 */
-  transform-origin: center bottom;  /* 底部中心为缩放基点 */
-  animation: dogPeek 3s ease-in-out 11s forwards;
-}
-
-/* 探头动画：1s 探出 + 1s 停留 + 1s 缩回 */
-@keyframes dogPeek {
-  0% {
-    bottom: -250px;          /* 完全隐藏 */
-  }
-  33% {
-    bottom: 45px;            /* 探出 */
-  }
-  66% {
-    bottom: 45px;            /* 停留 1 秒 */
-  }
-  100% {
-    bottom: -250px;          /* 缩回 */
-  }
-}
+/* --- 小狗探头动画（由内联 <style> 管理，避免和 .dog 样式冲突） --- */

@@ -5,6 +5,142 @@
   <meta name="viewport" content="width=375, initial-scale=1.0">
   <title>小陆的海边主页 🏖️</title>
   <link rel="stylesheet" href="style.css">
+  <!-- 探头小狗内联样式（隔离，避免和 .dog 样式冲突） -->
+  <style>
+    /* ========== 探头小狗公共样式 ========== */
+    #dog-peek-container .dog-peek {
+      position: absolute;
+      bottom: -250px;
+      z-index: 15;
+      transform-origin: center bottom;
+    }
+
+    /* --- 1号组：水平探出（从左往右） --- */
+    #dog-peek-container [class*="dog-peek-1"] {
+      transform: scale(3);
+      transform-origin: center bottom;
+    }
+    #dog-peek-container [class*="dog-peek-1"] .dog-head-wrapper {
+      position: absolute;
+      top: -25px; left: 65px;
+      width: 55px; height: 50px;
+      transform-origin: 27.5px 26px;
+      transform: rotate(180deg);
+    }
+    #dog-peek-container [class*="dog-peek-1"] .dog-head {
+      position: relative;
+      top: auto; left: auto;
+    }
+
+    /* --- 2号组：从右侧探出 --- */
+    #dog-peek-container [class*="dog-peek-2"] {
+      right: -250px;
+      left: auto;
+      transform: scale(3) rotate(-90deg);
+    }
+
+    /* --- 3号组：底部居中 --- */
+    #dog-peek-container [class*="dog-peek-3"] {
+      left: calc(50% - 196px);
+      transform: scale(3);
+    }
+
+    /* --- 头 --- */
+    #dog-peek-container .dog-head {
+      position: absolute;
+      width: 55px; height: 50px;
+      background: #D2A86E;
+      border-radius: 50% 50% 45% 45%;
+      top: -25px; left: 65px;
+      animation: headWobble 2s ease-in-out infinite;
+    }
+    @keyframes headWobble {
+      0%   { transform: translateY(0) rotate(-3deg); }
+      100% { transform: translateY(-3px) rotate(3deg); }
+    }
+
+    /* --- 耳朵 --- */
+    #dog-peek-container .dog-ear {
+      position: absolute;
+      width: 18px; height: 28px;
+      background: #B8860B;
+      border-radius: 50% 50% 30% 30%;
+      top: -5px;
+    }
+    #dog-peek-container .dog-ear-left {
+      right: 3px;
+      transform: rotate(20deg);
+      animation: earFlop 0.6s ease-in-out infinite alternate;
+    }
+    #dog-peek-container .dog-ear-right {
+      left: 3px;
+      transform: rotate(-20deg);
+      animation: earFlop 0.6s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes earFlop {
+      0%   { transform: rotate(-20deg); }
+      100% { transform: rotate(-10deg); }
+    }
+
+    /* --- 脸部 --- */
+    #dog-peek-container .dog-face {
+      position: absolute;
+      width: 40px; height: 35px;
+      background: #DEB887;
+      border-radius: 50%;
+      bottom: 5px; left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* --- 眼睛 --- */
+    #dog-peek-container .dog-eye {
+      position: absolute;
+      width: 7px; height: 8px;
+      background: #333;
+      border-radius: 50%;
+      top: 10px;
+    }
+    #dog-peek-container .dog-eye::after {
+      content: '';
+      position: absolute;
+      width: 3px; height: 3px;
+      background: white;
+      border-radius: 50%;
+      top: 1px; right: 1px;
+    }
+    #dog-peek-container .dog-eye-left  { right: 7px; }
+    #dog-peek-container .dog-eye-right { left: 7px; }
+
+    /* --- 鼻子 --- */
+    #dog-peek-container .dog-nose {
+      position: absolute;
+      width: 10px; height: 7px;
+      background: #333;
+      border-radius: 50% 50% 40% 40%;
+      bottom: 12px; left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* --- 嘴巴 --- */
+    #dog-peek-container .dog-mouth {
+      position: absolute;
+      width: 14px; height: 6px;
+      border-bottom: 2px solid #333;
+      border-radius: 0 0 50% 50%;
+      bottom: 6px; left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* --- 舌头 --- */
+    #dog-peek-container .dog-tongue {
+      position: absolute;
+      width: 6px; height: 10px;
+      background: #FF69B4;
+      border-radius: 0 0 50% 50%;
+      bottom: 0px; left: 50%;
+      transform: translateX(-50%);
+    }
+  </style>
 </head>
 <body>
 
@@ -192,17 +328,134 @@
       <div class="dog-leg dog-leg-br"></div>
     </div>
 
-    <!-- 小狗探头 -->
-    <div class="dog-peek">
-      <div class="dog-head">
-        <div class="dog-ear dog-ear-left"></div>
-        <div class="dog-ear dog-ear-right"></div>
-        <div class="dog-face">
-          <div class="dog-eye dog-eye-left"></div>
-          <div class="dog-eye dog-eye-right"></div>
-          <div class="dog-nose"></div>
-          <div class="dog-mouth"></div>
-          <div class="dog-tongue"></div>
+    <!-- 9只探头小狗（循环动画） -->
+    <div id="dog-peek-container">
+      <!-- ===== 1号组：水平探出（从左往右）===== -->
+      <div class="dog-peek dog-peek-1-1" id="dogPeek1-1">
+        <div class="dog-head-wrapper">
+          <div class="dog-head">
+            <div class="dog-ear dog-ear-left"></div>
+            <div class="dog-ear dog-ear-right"></div>
+            <div class="dog-face">
+              <div class="dog-eye dog-eye-left"></div>
+              <div class="dog-eye dog-eye-right"></div>
+              <div class="dog-nose"></div>
+              <div class="dog-mouth"></div>
+              <div class="dog-tongue"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dog-peek dog-peek-1-2" id="dogPeek1-2">
+        <div class="dog-head-wrapper">
+          <div class="dog-head">
+            <div class="dog-ear dog-ear-left"></div>
+            <div class="dog-ear dog-ear-right"></div>
+            <div class="dog-face">
+              <div class="dog-eye dog-eye-left"></div>
+              <div class="dog-eye dog-eye-right"></div>
+              <div class="dog-nose"></div>
+              <div class="dog-mouth"></div>
+              <div class="dog-tongue"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dog-peek dog-peek-1-3" id="dogPeek1-3">
+        <div class="dog-head-wrapper">
+          <div class="dog-head">
+            <div class="dog-ear dog-ear-left"></div>
+            <div class="dog-ear dog-ear-right"></div>
+            <div class="dog-face">
+              <div class="dog-eye dog-eye-left"></div>
+              <div class="dog-eye dog-eye-right"></div>
+              <div class="dog-nose"></div>
+              <div class="dog-mouth"></div>
+              <div class="dog-tongue"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 2号组：右侧探出（从右往左）===== -->
+      <div class="dog-peek dog-peek-2-1" id="dogPeek2-1">
+        <div class="dog-head">
+          <div class="dog-ear dog-ear-left"></div>
+          <div class="dog-ear dog-ear-right"></div>
+          <div class="dog-face">
+            <div class="dog-eye dog-eye-left"></div>
+            <div class="dog-eye dog-eye-right"></div>
+            <div class="dog-nose"></div>
+            <div class="dog-mouth"></div>
+            <div class="dog-tongue"></div>
+          </div>
+        </div>
+      </div>
+      <div class="dog-peek dog-peek-2-2" id="dogPeek2-2">
+        <div class="dog-head">
+          <div class="dog-ear dog-ear-left"></div>
+          <div class="dog-ear dog-ear-right"></div>
+          <div class="dog-face">
+            <div class="dog-eye dog-eye-left"></div>
+            <div class="dog-eye dog-eye-right"></div>
+            <div class="dog-nose"></div>
+            <div class="dog-mouth"></div>
+            <div class="dog-tongue"></div>
+          </div>
+        </div>
+      </div>
+      <div class="dog-peek dog-peek-2-3" id="dogPeek2-3">
+        <div class="dog-head">
+          <div class="dog-ear dog-ear-left"></div>
+          <div class="dog-ear dog-ear-right"></div>
+          <div class="dog-face">
+            <div class="dog-eye dog-eye-left"></div>
+            <div class="dog-eye dog-eye-right"></div>
+            <div class="dog-nose"></div>
+            <div class="dog-mouth"></div>
+            <div class="dog-tongue"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 3号组：从下往上探出 ===== -->
+      <div class="dog-peek dog-peek-3-1" id="dogPeek3-1">
+        <div class="dog-head">
+          <div class="dog-ear dog-ear-left"></div>
+          <div class="dog-ear dog-ear-right"></div>
+          <div class="dog-face">
+            <div class="dog-eye dog-eye-left"></div>
+            <div class="dog-eye dog-eye-right"></div>
+            <div class="dog-nose"></div>
+            <div class="dog-mouth"></div>
+            <div class="dog-tongue"></div>
+          </div>
+        </div>
+      </div>
+      <div class="dog-peek dog-peek-3-2" id="dogPeek3-2">
+        <div class="dog-head">
+          <div class="dog-ear dog-ear-left"></div>
+          <div class="dog-ear dog-ear-right"></div>
+          <div class="dog-face">
+            <div class="dog-eye dog-eye-left"></div>
+            <div class="dog-eye dog-eye-right"></div>
+            <div class="dog-nose"></div>
+            <div class="dog-mouth"></div>
+            <div class="dog-tongue"></div>
+          </div>
+        </div>
+      </div>
+      <div class="dog-peek dog-peek-3-3" id="dogPeek3-3">
+        <div class="dog-head">
+          <div class="dog-ear dog-ear-left"></div>
+          <div class="dog-ear dog-ear-right"></div>
+          <div class="dog-face">
+            <div class="dog-eye dog-eye-left"></div>
+            <div class="dog-eye dog-eye-right"></div>
+            <div class="dog-nose"></div>
+            <div class="dog-mouth"></div>
+            <div class="dog-tongue"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -247,5 +500,117 @@
 
   </div>
 
+  <script>
+    // ========== 9只探头小狗循环动画 ==========
+    const DOG_IDS = ['1-1','1-2','1-3','2-1','2-2','2-3','3-1','3-2','3-3'];
+
+    const dogConfigs = {
+      '1-1': { el:null, rotation:-90, defaultLeft:'9px', defaultScale:3.3, useOffset:false, direction:'horizontal', hideLeft:-250, fixedBottom:-50 },
+      '1-2': { el:null, rotation:-90, defaultLeft:'9px', defaultScale:3.3, useOffset:false, direction:'horizontal', hideLeft:-250, fixedBottom:-50 },
+      '1-3': { el:null, rotation:-90, defaultLeft:'9px', defaultScale:3.3, useOffset:false, direction:'horizontal', hideLeft:-250, fixedBottom:-50 },
+      '2-1': { el:null, rotation:-90, defaultLeft:'30px', defaultScale:3, useOffset:false, direction:'right-horizontal', hideRight:-250 },
+      '2-2': { el:null, rotation:-90, defaultLeft:'30px', defaultScale:3, useOffset:false, direction:'right-horizontal', hideRight:-250 },
+      '2-3': { el:null, rotation:-90, defaultLeft:'30px', defaultScale:3, useOffset:false, direction:'right-horizontal', hideRight:-250 },
+      '3-1': { el:null, rotation:0, defaultLeft:'calc(50% - 196px)', defaultScale:3.1, useOffset:true, hideBottom:-280 },
+      '3-2': { el:null, rotation:0, defaultLeft:'calc(50% - 196px)', defaultScale:3.1, useOffset:true, hideBottom:-280 },
+      '3-3': { el:null, rotation:0, defaultLeft:'calc(50% - 196px)', defaultScale:3.1, useOffset:true, hideBottom:-280 }
+    };
+
+    const defaultVals = {
+      '1-1': { bottom:-150, left:23, scale:2.5 },
+      '1-2': { bottom:-100, left:-19, scale:3.3 },
+      '1-3': { bottom:-50, left:39, scale:4.3 },
+      '2-1': { bottom:80, left:22, scale:2.2 },
+      '2-2': { bottom:-115, left:23, scale:3.0 },
+      '2-3': { bottom:-150, left:15, scale:2.2 },
+      '3-1': { bottom:30, left:-373, scale:2.6 },
+      '3-2': { bottom:6, left:-279, scale:3.1 },
+      '3-3': { bottom:29, left:-122, scale:2.6 }
+    };
+
+    let animCounter = 0;
+
+    // ========== 初始化 ==========
+    document.addEventListener('DOMContentLoaded', () => {
+      DOG_IDS.forEach(id => {
+        dogConfigs[id].el = document.getElementById('dogPeek' + id);
+      });
+      setTimeout(replayAll, 10700); // 10.7s + 0.3s replayDog延迟 = 第11秒探出
+    });
+
+    // ========== 停止探头动画（保留子元素微动画如headWobble） ==========
+    function stopAnim(id) {
+      const el = dogConfigs[id].el;
+      const anim = el.style.animation;
+      if (anim && anim !== 'none') {
+        // 提取并移除探头移动动画（dogPeekN），保留其他动画
+        const kept = anim.split(',').filter(a => !a.includes('dogPeek')).join(',').trim();
+        el.style.animation = kept || 'none';
+      }
+    }
+
+    // ========== 重播动画 ==========
+    function replayDog(id) {
+      const cfg = dogConfigs[id];
+      const v = defaultVals[id];
+
+      // 先隐藏，防止 stopAnim 移除 forwards 后闪现
+      cfg.el.style.opacity = '0';
+      stopAnim(id);
+      animCounter++;
+      const animName = 'dogPeek' + animCounter;
+      const s = document.createElement('style');
+
+      if (cfg.direction === 'horizontal') {
+        const hl = cfg.hideLeft !== undefined ? cfg.hideLeft : -250;
+        const fb = cfg.fixedBottom !== undefined ? cfg.fixedBottom : 0;
+        s.textContent = '@keyframes ' + animName + ' { 0%{left:' + hl + 'px} 33%{left:' + v.left + 'px} 66%{left:' + v.left + 'px} 100%{left:' + hl + 'px} }';
+        document.head.appendChild(s);
+        const r = cfg.rotation !== 0 ? ' rotate(' + cfg.rotation + 'deg)' : '';
+        cfg.el.style.left = hl + 'px';
+        cfg.el.style.bottom = fb + 'px';
+        cfg.el.style.transform = 'scale(' + v.scale + ')' + r;
+      } else if (cfg.direction === 'right-horizontal') {
+        const hr = cfg.hideRight !== undefined ? cfg.hideRight : -250;
+        s.textContent = '@keyframes ' + animName + ' { 0%{right:' + hr + 'px} 33%{right:' + v.left + 'px} 66%{right:' + v.left + 'px} 100%{right:' + hr + 'px} }';
+        document.head.appendChild(s);
+        const r = cfg.rotation !== 0 ? ' rotate(' + cfg.rotation + 'deg)' : '';
+        cfg.el.style.right = hr + 'px';
+        cfg.el.style.left = 'auto';
+        cfg.el.style.bottom = v.bottom + 'px';
+        cfg.el.style.transform = 'scale(' + v.scale + ')' + r;
+      } else {
+        const hb = cfg.hideBottom !== undefined ? cfg.hideBottom : -250;
+        s.textContent = '@keyframes ' + animName + ' { 0%{bottom:' + hb + 'px} 33%{bottom:' + v.bottom + 'px} 66%{bottom:' + v.bottom + 'px} 100%{bottom:' + hb + 'px} }';
+        document.head.appendChild(s);
+        const r = cfg.rotation !== 0 ? ' rotate(' + cfg.rotation + 'deg)' : '';
+        cfg.el.style.bottom = hb + 'px';
+        cfg.el.style.left = cfg.useOffset ? 'calc(50% - ' + Math.abs(v.left) + 'px)' : v.left + 'px';
+        cfg.el.style.transform = 'scale(' + v.scale + ')' + r;
+      }
+
+      void cfg.el.offsetWidth;
+      cfg.el.style.opacity = '1';
+      cfg.el.style.animation = animName + ' 3s ease-in-out 0.3s forwards';
+    }
+
+    // ========== 循环播放 ==========
+    const PLAY_ORDER = ['3-3','1-2','3-1','2-1','1-3','2-3','3-2','2-2','1-1'];
+    const ANIM_DURATION = 3300;
+    const GAP = 2000;
+    let loopTimer = null;
+
+    function replayAll() {
+      if (loopTimer) clearTimeout(loopTimer);
+      function playSequence() {
+        PLAY_ORDER.forEach((id, i) => {
+          setTimeout(() => replayDog(id), i * (ANIM_DURATION + GAP));
+        });
+        const totalDuration = PLAY_ORDER.length * (ANIM_DURATION + GAP);
+        loopTimer = setTimeout(playSequence, totalDuration + GAP);
+      }
+      playSequence();
+    }
+  </script>
 </body>
 </html>
