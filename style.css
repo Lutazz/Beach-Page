@@ -1262,6 +1262,7 @@ body {
    个人信息卡片
    ============================================ */
 .info-card {
+  display: none;
   position: absolute;
   top: 50%;
   right: 5%;
